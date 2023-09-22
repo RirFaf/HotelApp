@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="loading_failed">Failed to load</string>
+    <string name="retry">Retry</string>
+    <string name="loading">Loading</string>
+    <string name="content_description">Hotel picture</string>
+    <string name="hotel">Отель</string>
+    <string name="about_hotel">Об отеле</string>
+    <string name="to_room_choice">К выбору номера</string>
+    <string name="choose_this_room">Выбрать номер</string>
+    <string name="more_about_room">Подробнее о номере</string>
+</resources>
