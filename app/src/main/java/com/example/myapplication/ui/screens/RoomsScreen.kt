@@ -64,7 +64,7 @@ fun RoomsScreen(navController: NavController, rooms: ArrayList<RoomModel>, hotel
                 .padding(innerPadding)
         ) {
             itemsIndexed(rooms) { _, room ->
-                RoomCard(room = room)
+                RoomCard(room = room, navController = navController)
             }
         }
     }
@@ -97,7 +97,7 @@ private fun TopBar(navController: NavController, hotelName: String) {
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-private fun RoomCard(room: RoomModel) {
+private fun RoomCard(room: RoomModel, navController:NavController) {
     Card(
         modifier = Modifier
             .fillMaxSize()
@@ -183,7 +183,7 @@ private fun RoomCard(room: RoomModel) {
             }
             Button(
                 onClick = {
-                    /*TODO*/
+                    navController.navigate("booking_screen")
                 },
                 modifier = Modifier
                     .fillMaxWidth()

@@ -4,10 +4,13 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.myapplication.ui.screens.BookingScreen
 import com.example.myapplication.ui.screens.ErrorScreen
 import com.example.myapplication.ui.screens.HotelScreen
 import com.example.myapplication.ui.screens.LoadingScreen
 import com.example.myapplication.ui.screens.RoomsScreen
+import com.example.myapplication.viewmodels.BookingUIState
+import com.example.myapplication.viewmodels.BookingViewModel
 import com.example.myapplication.viewmodels.HotelUIState
 import com.example.myapplication.viewmodels.HotelViewModel
 import com.example.myapplication.viewmodels.RoomsUIState
@@ -17,7 +20,8 @@ import com.example.myapplication.viewmodels.RoomsViewModel
 fun AppNavGraph(
     navController: NavHostController,
     hotelViewModel: HotelViewModel,
-    roomsViewModel: RoomsViewModel
+    roomsViewModel: RoomsViewModel,
+    bookingViewModel: BookingViewModel
 ) {
     NavHost(
         navController = navController,
@@ -30,11 +34,9 @@ fun AppNavGraph(
                     HotelScreen(navController = navController, hotel = hotelUIState.hotel)
                     hotelName = hotelUIState.hotel.name.toString()
                 }
-
                 is HotelUIState.Loading -> {
                     LoadingScreen()
                 }
-
                 is HotelUIState.Error -> {
                     ErrorScreen(
                         retryAction = {
@@ -59,6 +61,27 @@ fun AppNavGraph(
                 }
 
                 is RoomsUIState.Error -> {
+                    ErrorScreen(
+                        retryAction = {
+                            roomsViewModel.getRooms()
+                        }
+                    )
+                }
+            }
+        }
+        composable(Screen.BookingScreen.route){
+            when (val bookingUIState = bookingViewModel.bookingUIState) {
+                is BookingUIState.Success -> {
+                    BookingScreen(
+                        navController = navController
+                    )
+                }
+
+                is BookingUIState.Loading -> {
+                    LoadingScreen()
+                }
+
+                is BookingUIState.Error -> {
                     ErrorScreen(
                         retryAction = {
                             roomsViewModel.getRooms()
