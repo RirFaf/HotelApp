@@ -73,7 +73,8 @@ fun AppNavGraph(
             when (val bookingUIState = bookingViewModel.bookingUIState) {
                 is BookingUIState.Success -> {
                     BookingScreen(
-                        navController = navController
+                        navController = navController,
+                        bookingUIState.selectedRoom
                     )
                 }
 

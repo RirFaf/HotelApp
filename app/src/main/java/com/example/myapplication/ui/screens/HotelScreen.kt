@@ -2,21 +2,9 @@
 
 package com.example.myapplication.ui.screens
 
-import android.media.Image
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.staggeredgrid.LazyHorizontalStaggeredGrid
-import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.PageSize
-import androidx.compose.foundation.pager.PagerDefaults
-import androidx.compose.foundation.pager.PagerScope
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.*
 import androidx.compose.foundation.text.ClickableText
@@ -33,10 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
@@ -45,8 +30,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
 import com.example.myapplication.R
 import com.example.myapplication.network.models.HotelModel
 import com.example.myapplication.ui.custom_composables.DescriptionCard
@@ -55,7 +38,6 @@ import com.example.myapplication.ui.theme.ButtonBlue
 import com.example.myapplication.ui.theme.CardTextYellow
 import com.example.myapplication.ui.theme.CardYellow
 import com.example.myapplication.ui.theme.CommonBackgroundColor
-import com.example.myapplication.ui.theme.DescriptionCardColor
 import com.example.myapplication.ui.theme.PriceForItColor
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
@@ -90,7 +72,7 @@ fun HotelScreen(navController: NavController, hotel: HotelModel) {
                     ),
                 ) {
                     Spacer(modifier = Modifier.padding(6.dp))
-                    RatingCard(hotel = hotel)
+                    RatingCard(rating = hotel.rating.toString(), ratingName = hotel.ratingName)
                     Spacer(modifier = Modifier.padding(4.dp))
                     Text(
                         text = hotel.name ?: "",
@@ -361,7 +343,7 @@ private fun BottomBar(navController: NavController) {
 
 
 @Composable
-fun RatingCard(hotel: HotelModel) {
+fun RatingCard(rating: String?, ratingName: String?) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
@@ -383,7 +365,7 @@ fun RatingCard(hotel: HotelModel) {
                     tint = CardTextYellow
                 )
                 Text(
-                    text = "${hotel.rating ?: ""} ${hotel.ratingName ?: ""}",
+                    text = "${rating ?: ""} ${ratingName ?: ""}",
                     fontSize = 16.sp,
                     color = CardTextYellow,
                     fontWeight = FontWeight.SemiBold

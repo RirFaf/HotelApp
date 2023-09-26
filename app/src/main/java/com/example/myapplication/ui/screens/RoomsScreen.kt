@@ -76,7 +76,7 @@ private fun TopBar(navController: NavController, hotelName: String) {
         modifier = Modifier
             .fillMaxWidth()
             .background(Color.White),
-        horizontalArrangement = Arrangement.SpaceEvenly,
+        horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(onClick = { navController.popBackStack() }) {
@@ -87,11 +87,18 @@ private fun TopBar(navController: NavController, hotelName: String) {
             )
         }
         Text(
-            text = hotelName,
+            text = /*hotelName*/"jntkm",
             fontWeight = FontWeight.SemiBold,
             color = Color.Black,
             fontSize = 18.sp
         )
+        IconButton(onClick = { }) {
+            Icon(
+                painter = painterResource(id = R.drawable.left_arrow),
+                contentDescription = "left arrow",
+                tint = Color.Transparent
+            )
+        }
     }
 }
 
